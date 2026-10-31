@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Rooms - CampusNest SL</title>
+  
+  <!-- Leaflet CSS for Interactive Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    /* CSS Variables & Reset */
+    :root {
+      --navy: #14213D;
+      --gold: #C9A227;
+      --cream: #F4EFD9;
+      --white: #FFFFFF;
+      --text-dark: #222222;
+      --font-family: 'Open Sans', Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--text-dark);
+      background-color: #FAFAFA;
+      line-height: 1.6;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--navy);
+      color: var(--white);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    nav a.active, nav a:hover {
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    /* Main Container */
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h1 {
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      background-color: var(--cream);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #e0dab5;
+      margin-bottom: 2rem;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .filter-group label {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .filter-group select {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: var(--white);
+    }
+
+    .results-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    /* Search Layout */
+    .search-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .listings-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .room-card {
+      background: var(--white);
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .room-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+    }
+
+    .room-photo-placeholder {
+      width: 120px;
+      height: 100px;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #666;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .room-details {
+      flex-grow: 1;
+    }
+
+    .badge-verified {
+      background-color: var(--navy);
+      color: var(--gold);
+      font-size: 0.75rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.3rem;
+    }
+
+    .room-details h3 {
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+
+    .room-price {
+      font-weight: bold;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .room-distance {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--gold);
+      color: var(--navy);
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      min-height: 38px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 0.85rem;
+    }
+
+    .btn-primary:hover {
+      background-color: #b08d1f;
+    }
+
+    .btn-whatsapp {
+      background-color: #25D366;
+      color: white;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #1ebe5d;
+    }
+
+    /* Leaflet Map Container */
+    #map {
+      width: 100%;
+      height: 480px;
+      border-radius: 8px;
+      border: 1px solid #e0dab5;
+      position: sticky;
+      top: 90px;
+      z-index: 1;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .search-layout {
+        grid-template-columns: 1fr;
+      }
+      #map {
+        height: 300px;
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 1rem;
+        width: 100%;
+      }
+      .room-card {
+        flex-direction: column;
+      }
+      .room-photo-placeholder {
+        width: 100%;
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <a href="index.html" class="logo">CampusNest SL</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="search.html" class="active">Search Rooms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h1>Find Rooms Near Campus</h1>
+
+    <!-- Filter Controls -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="campus-select">Campus</label>
+        <select id="campus-select">
+          <option value="all">All Campuses</option>
+          <option value="limkokwing">Limkokwing (Hill Station)</option>
+          <option value="fbc">Fourah Bay College (FBC)</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="budget-select">Max Price (Le)</label>
+        <select id="budget-select">
+          <option value="all">Any Budget</option>
+          <option value="1000">Under Le 1,000</option>
+          <option value="1500">Under Le 1,500</option>
+        </select>
+      </div>
+      <div class="filter-group" style="justify-content: flex-end;">
+        <button id="apply-btn" class="btn-primary">Apply Filters</button>
+      </div>
+    </div>
+
+    <div class="results-meta">
+      <span id="room-count">3 rooms found</span>
+      <span>Sort by: Price (Low to High)</span>
+    </div>
+
+    <!-- Search Layout -->
+    <div class="search-layout">
+      <!-- Listings Column -->
+      <div class="listings-column" id="listings-container">
+        <!-- Dynamic Cards rendered via JS -->
+      </div>
+
+      <!-- Interactive Map Element -->
+      <div id="map"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 CampusNest SL. Accommodation Platform.</p>
+  </footer>
+
+  <!-- Leaflet JavaScript Library -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Map Functionality Script -->
+  <script>
+    // 1. Accommodation Data with Freetown Coordinates
+    const rooms = [
+      {
+        id: 1,
+        title: "Self-Contained Room - Hill Station",
+        price: 1200,
+        campus: "limkokwing",
+        distance: "0.8 km to Limkokwing Campus",
+        lat: 8.4552,
+        lng: -13.2312,
+        rating: "⭐ 4.8"
+      },
+      {
+        id: 2,
+        title: "Single Room with Utilities - Regent",
+        price: 950,
+        campus: "limkokwing",
+        distance: "1.2 km to Limkokwing Campus",
+        lat: 8.4410,
+        lng: -13.2180,
+        rating: "⭐ 4.6"
+      },
+      {
+        id: 3,
+        title: "Shared Apartment Room - Mount Aureol",
+        price: 800,
+        campus: "fbc",
+        distance: "0.5 km to FBC Campus",
+        lat: 8.4750,
+        lng: -13.2200,
+        rating: "⭐ 4.9"
+      }
+    ];
+
+    // 2. Initialize Leaflet Map centered on Freetown
+    const map = L.map('map').setView([8.4600, -13.2250], 13);
+
+    // 3. Add OpenStreetMap Tile Layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    let markers = [];
+
+    // 4. Function to Render Listings & Map Pins
+    function renderListings(filteredRooms) {
+      const container = document.getElementById('listings-container');
+      const countEl = document.getElementById('room-count');
+      container.innerHTML = "";
+
+      // Clear existing markers
+      markers.forEach(m => map.removeLayer(m));
+      markers = [];
+
+      countEl.innerText = `${filteredRooms.length} room${filteredRooms.length === 1 ? '' : 's'} found`;
+
+      filteredRooms.forEach(room => {
+        // Create Room Card HTML
+        const card = document.createElement('div');
+        card.className = 'room-card';
+        card.innerHTML = `
+        <img src="images/zzz.jpg" class="room-photo-placeholder" alt="${room.title}">
+          <div class="room-details">
+            <span class="badge-verified">✓ Verified</span>
+            <h3>${room.title}</h3>
+            <p class="room-price">Le ${room.price} / month</p>
+            <p class="room-distance">${room.distance} | ${room.rating}</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <a href="contact.html" class="btn-primary">Request Viewing</a>
+              <a href="https://wa.me/232030010855" class="btn-primary btn-whatsapp" target="_blank">WhatsApp</a>
+            </div>
+          </div>
+        `;
+
+        // Card click pans to map location
+        card.addEventListener('click', () => {
+          map.flyTo([room.lat, room.lng], 15);
+        });
+
+        container.appendChild(card);
+
+        // Add Marker to Map
+        const marker = L.marker([room.lat, room.lng]).addTo(map);
+        marker.bindPopup(`
+          <div style="text-align: center;">
+            <b style="color: #14213D;">${room.title}</b><br>
+            <span style="color: #C9A227; font-weight: bold;">Le ${room.price} / month</span><br>
+            <a href="contact.html" style="font-size: 0.8rem; color: #14213D;">Request Viewing</a>
+          </div>
+        `);
+        markers.push(marker);
+      });
+    }
+
+    // Initial render of all rooms
+    renderListings(rooms);
+
+    // 5. Filter Interactive Logic
+    document.getElementById('apply-btn').addEventListener('click', () => {
+      const selectedCampus = document.getElementById('campus-select').value;
+      const selectedBudget = document.getElementById('budget-select').value;
+
+      const filtered = rooms.filter(room => {
+        const matchesCampus = (selectedCampus === 'all' || room.campus === selectedCampus);
+        const matchesBudget = (selectedBudget === 'all' || room.price <= parseInt(selectedBudget));
+        return matchesCampus && matchesBudget;
+      });
+
+      renderListings(filtered);
+    });
+  </script>
+
+</body>
+</html>

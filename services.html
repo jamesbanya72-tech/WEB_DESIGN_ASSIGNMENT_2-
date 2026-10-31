@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services - CampusNest SL</title>
+  <style>
+    /* CSS Variables & Reset */
+    :root {
+      --navy: #14213D;
+      --gold: #C9A227;
+      --cream: #F4EFD9;
+      --white: #FFFFFF;
+      --text-dark: #222222;
+      --font-family: 'Open Sans', Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--text-dark);
+      background-color: #FAFAFA;
+      line-height: 1.6;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--navy);
+      color: var(--white);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    nav a.active, nav a:hover {
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    /* Main Container */
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h1 {
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Services Grid Layout */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .service-card {
+      background-color: var(--cream);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid #e0dab5;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .service-icon {
+      width: 50px;
+      height: 50px;
+      background-color: var(--gold);
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--gold);
+      color: var(--navy);
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      min-height: 44px;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-primary:hover {
+      background-color: #b08d1f;
+    }
+
+    /* Call to Action Banner */
+    .cta-banner {
+      background-color: var(--cream);
+      border: 1px solid #e0dab5;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+
+    .cta-banner h3 {
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 1rem;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <a href="index.html" class="logo">CampusNest SL</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="search.html">Search Rooms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h1>Our Services</h1>
+    <p style="margin-bottom: 2rem;">Explore how CampusNest SL streamlines student accommodation, roommate sharing, landlord registration, and safety verification across Freetown, BO, and other locations.</p>
+
+    <!-- Services Cards Grid -->
+    <div class="services-grid">
+      <!-- Service 1: Browse Listings -->
+      <div class="service-card">
+        <div>
+          <div class="service-icon"></div>
+          <h3>Browse Listings</h3>
+          <p>Search and filter verified rooms by campus proximity, monthly budget ranges, room types, and distance metrics.</p>
+        </div>
+        <a href="search.html" class="btn-primary">Learn More</a>
+      </div>
+
+      <!-- Service 2: Roommate Matching -->
+      <div class="service-card">
+        <div>
+          <div class="service-icon"></div>
+          <h3>Roommate Matching</h3>
+          <p>Connect with fellow students looking to share apartment costs, split rent, and secure larger housing near campus safely.</p>
+        </div>
+        <a href="search.html" class="btn-primary">Learn More</a>
+      </div>
+
+      <!-- Service 3: Landlord Registration -->
+      <div class="service-card">
+        <div>
+          <div class="service-icon"></div>
+          <h3>Landlord Registration</h3>
+          <p>An easy registration system for property owners and agents to list vacant rooms, upload photos, and manage viewing requests.</p>
+        </div>
+        <a href="contact.html" class="btn-primary">Learn More</a>
+      </div>
+
+      <!-- Service 4: Verification & Safety -->
+      <div class="service-card">
+        <div>
+          <div class="service-icon"></div>
+          <h3>Verification & Safety</h3>
+          <p>Rigorous checks to authenticate landlords, review property documentation, and eliminate scams to protect student tenants.</p>
+        </div>
+        <a href="about.html" class="btn-primary">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Call to Action Banner -->
+    <div class="cta-banner">
+      <h3>Ready to find your room?</h3>
+      <a href="search.html" class="btn-primary">Start Searching</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 CampusNest SL. Mr Banya housing .</p>
+  </footer>
+
+</body>
+</html>

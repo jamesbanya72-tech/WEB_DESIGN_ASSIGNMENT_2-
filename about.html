@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - CampusNest SL</title>
+  <style>
+    /* CSS Variables & Reset */
+    :root {
+      --navy: #14213D;
+      --gold: #C9A227;
+      --cream: #F4EFD9;
+      --white: #FFFFFF;
+      --text-dark: #222222;
+      --font-family: 'Open Sans', Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--text-dark);
+      background-color: #FAFAFA;
+      line-height: 1.6;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--navy);
+      color: var(--white);
+      padding: 0.2rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    nav a.active, nav a:hover {
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    /* Main Container */
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h1 {
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+
+    /* About Content Grid */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .story-box {
+      background-color: var(--cream);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid #e0dab5;
+    }
+
+    .story-box h2 {
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .story-box p {
+      margin-bottom: 1rem;
+    }
+
+    .image-placeholder {
+      background-color: #e0e0e0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-weight: bold;
+      min-height: 250px;
+      text-align: center;
+      padding: 1rem;
+      border: 2px dashed #bbb;
+    }
+
+    /* How It Works Section */
+    .how-it-works {
+      margin-top: 3rem;
+    }
+
+    .how-it-works h2 {
+      text-align: center;
+      color: var(--navy);
+      margin-bottom: 2rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .step-card {
+      background: var(--cream);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid #e0dab5;
+    }
+
+    .step-number {
+      background-color: var(--gold);
+      color: var(--navy);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin: 0 auto 1rem auto;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 1rem;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <a href="index.html" class="logo">CampusNest SL</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="search.html">Search Rooms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h1>About CampusNest SL</h1>
+
+    <div class="about-grid">
+      <!-- Story / Mission Box -->
+      <div class="story-box">
+        <h2>Our Story & Mission</h2>
+        <p>Students who move to Freetown to study often find it difficult to locate safe, affordable, and genuine accommodation near their campus. Rooms are traditionally advertised through scattered informal channels where prices and conditions are unclear.</p>
+        <p><strong>Our Mission:</strong> To design a clear, trustworthy, and mobile-friendly platform that reduces the time, cost, and risk involved in finding student accommodation in Freetown. We place trust, price clarity, and ease of direct contact first.</p>
+      </div>
+
+      <!-- Team / Campus Photo Placeholder -->
+<div class="image-placeholder">
+    < <img src="ttt/ttt.jpg" alt="Room Photo" onerror="this.src='https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80'">
+          </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+      <h2>How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Search</h3>
+          <p>Filter verified rooms by your preferred campus, budget limit, and maximum distance.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Compare</h3>
+          <p>View side-by-side listing cards detailing transparent prices, amenities, and security badges.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Request Viewing</h3>
+          <p>Submit a quick viewing request form or contact verified landlords directly via WhatsApp.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Move In</h3>
+          <p>Visit the space with confidence, finalize your agreement terms, and settle in safely.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 CampusNest SL. Mr Banya housing .</p>
+  </footer>
+
+</body>
+</html>

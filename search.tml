@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Rooms - CampusNest SL</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">CampusNest SL</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="search.html" class="active">Search Rooms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding: 2rem;">
+    <h2>Find Accommodation Near Campus</h2>
+    
+    <!-- Filter Controls -->
+    <form style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; background: var(--cream); padding: 1rem; border-radius: 6px;">
+      <select name="campus" style="padding: 0.5rem;">
+        <option value="">Select Campus</option>
+        <option value="limkokwing">Limkokwing University</option>
+        <option value="fbc">Fourah Bay College (FBC)</option>
+        <option value="ipam">IPAM</option>
+      </select>
+      <select name="budget" style="padding: 0.5rem;">
+        <option value="">Max Monthly Budget</option>
+        <option value="1000">Under NLe 1,000</option>
+        <option value="2000">Under NLe 2,000</option>
+      </select>
+      <button type="submit" class="btn-primary">Filter</button>
+    </form>
+
+    <div class="grid-container">
+      <div class="card">
+        <span class="badge-verified">✓ Verified</span>
+        <h3>Single Room - Hill Station</h3>
+        <p>NLe 1,000 / month | 0.5 km to Campus</p>
+        <p>Amenities: Water, Electricity, Security</p>
+        <br>
+        <a href="https://wa.me/23200000000" class="btn-primary" style="background: #25D366; color: white;">Contact via WhatsApp</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 CampusNest SL.</p>
+  </footer>
+</body>
+</html>

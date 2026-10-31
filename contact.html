@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - CampusNest SL</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">CampusNest SL</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="search.html">Search Rooms</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding: 2rem; max-width: 800px; margin: auto;">
+    <h2>Get in Touch</h2>
+    <form style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required style="padding: 0.5rem;">
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required style="padding: 0.5rem;">
+
+      <label for="role">I am a:</label>
+      <select id="role" name="role" style="padding: 0.5rem;">
+        <option value="student">Student</option>
+        <option value="landlord">Landlord</option>
+      </select>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required style="padding: 0.5rem;"></textarea>
+
+      <button type="submit" class="btn-primary">Send Message</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 CampusNest SL. Mr Banya housing .</p>
+  </footer>
+</body>
+</html>

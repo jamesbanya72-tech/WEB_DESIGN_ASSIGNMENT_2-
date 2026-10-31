@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusNest SL | Student Housing</title>
+  <style>
+    :root {
+      --primary: #1e293b;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Modern Navbar */
+    .header {
+      background-color: var(--primary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+   .navbar {
+      height: 42px; /* Narrow vertical height */
+      display: flex;
+      justify-content: space-between; /* Brand on left, links on right */
+      align-items: center;
+    }
+    .logo {
+      color: #ffffff;
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 48px 0;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 32px;
+      align-items: center;
+      border: 1px solid var(--border);
+    }
+
+    .hero-content h1 {
+      font-size: 2.2rem;
+      line-height: 1.25;
+      color: var(--primary);
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+
+    .hero-content p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(245, 158, 11, 0.4);
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 260px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Search & Filter Bar */
+    .filter-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) auto;
+      gap: 16px;
+    }
+
+    .filter-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background-color: #f8fafc;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .filter-group select:focus {
+      border-color: var(--accent);
+    }
+
+    /* Listings Section */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .listings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .room-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .room-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .room-thumb {
+      height: 180px;
+      width: 100%;
+      position: relative;
+      background: #e2e8f0;
+    }
+
+    .room-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge-verified {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(16, 185, 129, 0.9);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .room-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .room-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .room-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-hover);
+      margin-bottom: 4px;
+    }
+
+    .room-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--primary);
+      color: #94a3b8;
+      padding: 32px 0;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+      .listings-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Nav -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">CampusNest <span>SL</span></a>
+        <div class="nav-links">
+          <a href="index.html" class="active">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero Banner -->
+    <section class="hero-section">
+      <div class="hero-card">
+        <div class="hero-content">
+          <h1>Find Safe, Affordable Student Housing Near Campus</h1>
+          <p>Direct access to verified student rooms, shared apartments, and single units across Freetown.</p>
+          <a href="search.html" class="btn-primary">Browse Verified Listings</a>
+        </div>
+        <div class="hero-image">
+          <!-- You can replace this image src with your own inside images/ folder -->
+          <img src="images/lp.jpg" alt="Student Housing Banner" onerror="this.src='https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80'">
+        </div>
+      </div>
+    </section>
+
+    <!-- Search / Filter Bar -->
+    <section class="filter-card">
+      <form class="filter-grid" action="search.html" method="GET">
+        <div class="filter-group">
+          <select name="campus">
+            <option value="">Select Campus</option>
+            <option value="limkokwing">Limkokwing University</option>
+            <option value="fbc">Fourah Bay College (FBC)</option>
+            <option value="ipam">IPAM</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <select name="budget">
+            <option value="">Budget Range</option>
+            <option value="500-1000">Le 500 - Le 1,000 / mo</option>
+            <option value="1000-1500">Le 1,000 - Le 1,500 / mo</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <select name="room_type">
+            <option value="">Room Type</option>
+            <option value="self-contained">Self-Contained</option>
+            <option value="single">Single Room</option>
+            <option value="shared">Shared Room</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary">Search Rooms</button>
+      </form>
+    </section>
+
+    <!-- Featured Listings -->
+    <section>
+      <div class="section-header">
+        <h2>Featured Listings</h2>
+      </div>
+
+      <div class="listings-grid">
+        <!-- Room 1 -->
+        <div class="room-card">
+          <div class="room-thumb">
+            <span class="badge-verified">✓ Verified</span>
+            <img src="images/tp.jpg" alt="Room Photo" onerror="this.src='https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80'">
+          </div>
+          <div class="room-body">
+            <div class="room-price">Le 1,200 / month</div>
+            <h3 class="room-title">Self-Contained Room - Hill Station</h3>
+            <p class="room-meta">📍 0.8 km to Limkokwing Campus</p>
+          </div>
+        </div>
+
+        <!-- Room 2 -->
+        <div class="room-card">
+          <div class="room-thumb">
+            <span class="badge-verified">✓ Verified</span>
+            <img src="images/jp.jpg" alt="Room Photo" onerror="this.src='https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=600&q=80'">
+          </div>
+          <div class="room-body">
+            <div class="room-price">Le 1,000 / month</div>
+            <h3 class="room-title">Single Room with Utilities - Regent</h3>
+            <p class="room-meta">📍 1.2 km to Campus</p>
+          </div>
+        </div>
+
+        <!-- Room 3 -->
+        <div class="room-card">
+          <div class="room-thumb">
+            <span class="badge-verified">✓ Verified</span>
+            <img src="images/zzz.jpg" alt="Room Photo" onerror="this.src='https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80'">
+          </div>
+          <div class="room-body">
+            <div class="room-price">Le 800 / month</div>
+            <h3 class="room-title">Shared Apartment - Mount Aureol</h3>
+            <p class="room-meta">📍 0.5 km to FBC Campus</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <a href="about.html">About Us</a> | 
+        <a href="services.html">Services</a> | 
+        <a href="contact.html">Contact</a> | 
+        <a href="#">Privacy Policy</a>
+      </p>
+      <p style="margin-top: 10px;">&copy; 2026 CampusNest SL. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

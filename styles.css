@@ -1,0 +1,125 @@
+/* Base & CSS Variables */
+:root {
+  --navy: #14213D;
+  --gold: #C9A227;
+  --cream: #F4EFD9;
+  --white: #FFFFFF;
+  --text-dark: #222222;
+  --font-family: 'Open Sans', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-dark);
+  background-color: #FAFAFA;
+  line-height: 1.6;
+}
+
+/* Header & Navigation */
+header {
+  background-color: var(--navy);
+  color: var(--white);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+nav a.active, nav a:hover {
+  color: var(--gold);
+  font-weight: bold;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--gold);
+  color: var(--navy);
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  min-height: 44px; /* Mobile touch target */
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: #b08d1f;
+}
+
+/* Responsive Grid / Cards */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.badge-verified {
+  background-color: var(--navy);
+  color: var(--gold);
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+  background-color: var(--navy);
+  color: var(--white);
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}
